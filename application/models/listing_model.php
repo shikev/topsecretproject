@@ -27,7 +27,6 @@ class Listing_model extends CI_Model {
             for($i = 0; $i < count($itemArray); $i++){
                 $qrystring = $qrystring . ' AND `name` LIKE \'%' . $itemArray[$i] . '%\'';
             }
-            var_dump($qrystring);
             $query = $this->db->query($qrystring);
             return $query->result_array();
         }

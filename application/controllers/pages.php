@@ -14,8 +14,9 @@ class Pages extends CI_Controller{
 		}
 
 	public function index(){
-		$this->load->view('templates/navbar.php');
 		$this->load->view('templates/header.php');
+		$this->load->view('templates/navbar.php');
+
 		$this->load->view('content/home');
 		$this->load->view('templates/footer.php');
 
@@ -79,6 +80,31 @@ class Pages extends CI_Controller{
 			else{
 				//figure out after redoing professor's profile
 			}
+		}
+	}
+
+	public function usersearch(){
+		if(isset($_POST['users_search_submit'])){
+			$this->load->model('school_model');
+			$search = $this->input->post('users');
+			$items = explode(" ", $search);
+			$school = $this->user_model->get_school($this->tank_auth->get_username());
+			$data['schoolName'] = $this->school_model->get_school_name($school);
+			$data['userArray'] = $this->user_model->search_professors($items, $school);
+			$this->load->view('templates/navbar.php');
+			$this->load->view('templates/header.php');
+			$this->load->view('content/usersearch.php', $data);
+			$this->load->view('templates/footer.php');
+		}
+		else{
+			$this->load->model('school_model');
+			$school = $this->user_model->get_school($this->tank_auth->get_username());
+			$data['userArray'] = null;
+			$data['schoolName'] = $this->school_model->get_school_name($school);
+			$this->load->view('templates/navbar.php');
+			$this->load->view('templates/header.php');
+			$this->load->view('content/listings.php', $data);
+			$this->load->view('templates/footer.php');
 		}
 	}
 

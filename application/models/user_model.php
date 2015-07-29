@@ -121,4 +121,13 @@ class User_model extends CI_Model {
                 $this->db->update('userinfo', $data, $where);
         }
 
+        public function search_professors($itemArray, $school){
+            $qrystring = "SELECT * FROM `userinfo` WHERE `school`='$school'";
+            for($i = 0; $i < count($itemArray); $i++){
+                $qrystring = $qrystring . ' AND `name` LIKE \'%' . $itemArray[$i] . '%\'';
+            }
+            $query = $this->db->query($qrystring);
+            return $query->result_array();
+        }
+
 }

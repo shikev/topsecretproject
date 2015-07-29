@@ -1,4 +1,4 @@
-<div class="container form-container">
+<div class="container form-container fullpage">
 
         <?php echo form_open(base_url() . 'pages/listings', array('id'=>'form1', 'class'=>'form-horizontal'));?>
         <div class="form-heading" style="center-align"><h2>Listings</h2></div>
@@ -14,12 +14,12 @@
 
         <a class="btn btn-default" href="<?php echo base_url();?>pages/listings">View All Listings</a>
 
-        <?php echo form_open(base_url() . 'pages/listings', array('id'=>'form1', 'class'=>'form-horizontal'));?>
+        <?php echo form_open(base_url() . 'pages/usersearch', array('id'=>'form1', 'class'=>'form-horizontal'));?>
         <div class="form-heading" style="center-align"><h2>Users</h2></div>
             <div class="form-group" id="personNameValidGroup">
                 <label class="col-sm-2 control-label" for="personName">Search by users </label>
                 <div class="col-sm-9">
-                    <?php echo form_input(array('name'=>'users', 'id'=>'search', 'class'=>'form-control', 'placeholder'=>'Search Listings', 'required'=>'required')); ?>
+                    <?php echo form_input(array('name'=>'users', 'id'=>'search', 'class'=>'form-control', 'placeholder'=>'Search Faculty', 'required'=>'required')); ?>
                 </div>
             </div>
             

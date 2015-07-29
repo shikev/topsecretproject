@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head runat="server">
+<head>
 
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +13,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="<?php echo base_url(); ?>assets/css/custom.css" rel="stylesheet" />"
+    <link href="<?php echo base_url(); ?>assets/css/custom.css" rel="stylesheet" />
     
     <!-- Custom CSS -->
 
