@@ -3,7 +3,7 @@
 <?php echo form_open(base_url() . 'pages/usersearch', array('id'=>'form1', 'class'=>'form-horizontal'));?>
         <div class="form-heading" style="center-align"><h2>Users</h2></div>
             <div class="form-group" id="personNameValidGroup">
-                <label class="col-sm-2 control-label" for="personName">Search by users </label>
+                <label class="col-sm-2 control-label" for="personName">Search for Professors </label>
                 <div class="col-sm-9">
                     <?php echo form_input(array('name'=>'users', 'id'=>'search', 'class'=>'form-control', 'placeholder'=>'Search Faculty', 'required'=>'required')); ?>
                 </div>

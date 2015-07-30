@@ -122,7 +122,7 @@ class User_model extends CI_Model {
         }
 
         public function search_professors($itemArray, $school){
-            $qrystring = "SELECT * FROM `userinfo` WHERE `school`='$school'";
+            $qrystring = "SELECT * FROM `userinfo` WHERE `school`='$school' AND `usertype`='professor'";
             for($i = 0; $i < count($itemArray); $i++){
                 $qrystring = $qrystring . ' AND `name` LIKE \'%' . $itemArray[$i] . '%\'';
             }

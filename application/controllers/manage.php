@@ -489,7 +489,6 @@ class Manage extends CI_Controller{
 				{
 					$this->load->view('templates/header.php');
 					$this->load->view('user/professors/createlisting.php');
-					$this->load->view('templates/footer.php');
 				}
 				else{
 					$this->load->model('listing_model');
@@ -503,7 +502,9 @@ class Manage extends CI_Controller{
 					$isChem = $this->input->post('categoryChem');
 					$isBio = $this->input->post('categoryBio');
 					$isPhys = $this->input->post('categoryPhysics');
-					$categories = array($isChem, $isBio, $isPhys);
+					$isEcon = $this->input->post('categoryEcon');
+					var_dump($isPhys);
+					$categories = array($isChem, $isBio, $isPhys, $isEcon);
 					$this->listing_model->create_listing($name, $reqs, $description, $pay, $time, $school, $username, $categories);
 				}
 			}

@@ -16,28 +16,25 @@
     
     <!-- Custom CSS -->
     <link href="<?php echo base_url(); ?>assets/css/sweetalert.css" rel="stylesheet" />
+    <link href="<?php echo base_url(); ?>assets/css/custom.css" rel="stylesheet" />
     <!-- Javascript -->
     <script language="javascript" type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery-1.10.2.js"></script>
     <script language="javascript" type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
     <script language="javascript" type="text/javascript" src="<?php echo base_url(); ?>assets/js/respond.js"></script>
-    <script language="javascript" type="text/javascript" src="<?php echo base_url(); ?>assets/js/sweetalert.min.js"></script>
-
+    <script language="javascript" type="text/javascript" src="<?php echo base_url(); ?>assets/js/listingupdates.js"></script>
+    
    
 
     <!-- Custom Fonts -->
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
-    <script type="text/javascript">
-
-    function saved(){
-        swal({   title: "Information Successfully Saved!",   text: "",   timer: 2000,   showConfirmButton: false });
-    }
-
-    
+    <script>
+        
 
 
 
     </script>
+    
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -46,7 +43,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body <?php if($saved == true) echo 'onload="saved()"'?>>
+
 
         
 

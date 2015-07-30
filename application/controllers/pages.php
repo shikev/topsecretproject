@@ -32,8 +32,9 @@ class Pages extends CI_Controller{
 			$school = $this->user_model->get_school($this->tank_auth->get_username());
 			$data['schoolName'] = $this->school_model->get_school_name($school);
 			$data['listingArray'] = $this->listing_model->search($items, $school);
+			$this->load->view('templates/listingheader.php');
 			$this->load->view('templates/navbar.php');
-			$this->load->view('templates/header.php');
+			
 			$this->load->view('content/listings.php', $data);
 			$this->load->view('templates/footer.php');
 		}
@@ -43,8 +44,9 @@ class Pages extends CI_Controller{
 			$school = $this->user_model->get_school($this->tank_auth->get_username());
 			$data['listingArray'] = $this->listing_model->get_listings($school);
 			$data['schoolName'] = $this->school_model->get_school_name($school);
+			$this->load->view('templates/listingheader.php');
 			$this->load->view('templates/navbar.php');
-			$this->load->view('templates/header.php');
+			
 			$this->load->view('content/listings.php', $data);
 			$this->load->view('templates/footer.php');
 		}
@@ -106,6 +108,19 @@ class Pages extends CI_Controller{
 			$this->load->view('content/listings.php', $data);
 			$this->load->view('templates/footer.php');
 		}
+	}
+
+	public function listing_update(){
+		$isChem = $this->input->post('categoryChem');
+		$isBio = $this->input->post('categoryBio');
+		$isPhys = $this->input->post('categoryPhysics');
+		$isEcon = $this->input->post('categoryEcon');
+		$categories = array($isChem, $isBio, $isPhys, $isEcon);
+		var_dump($categories);
+		$this->load->model('listing_model');
+		$data['listingArray'] = $this->listing_model->get_listings_by_category($categories);
+		var_dump($data['listingArray']);
+		$this->load->view('content/listingresults.php',$data);
 	}
 
 	// public function changeusertype(){
