@@ -21,7 +21,6 @@
     <script language="javascript" type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery-1.10.2.js"></script>
     <script language="javascript" type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
     <script language="javascript" type="text/javascript" src="<?php echo base_url(); ?>assets/js/respond.js"></script>
-    <script language="javascript" type="text/javascript" src="<?php echo base_url(); ?>assets/js/listingupdates.js"></script>
     
    
 

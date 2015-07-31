@@ -7,12 +7,20 @@ class User_model extends CI_Model {
                 $this->load->library('tank_auth');
         }
 
-        public function set_username($username = null){
+        public function set_user($username = null, $email = null){
         	if($username == null){
         	       return null;
         	}
+            $domain = substr(strrchr($email, "@"), 1);
+            $query = $this->db->query("SELECT `id` FROM `schools` WHERE `extension`='$domain' LIMIT 1");
+            //var_dump("SELECT `id` FROM `schools` WHERE `extension`='$domain' LIMIT 1");
+            if($query->num_rows() != 0){
+                $row = $query->row_array();
+                $schoolid = $row['id'];
+            }
 
-        	$query = $this->db->query("INSERT INTO `userinfo`(`username`, `usertype`) VALUES('$username', 'user');");
+           // $this->db->query("sejfioejaioah");
+        	$query = $this->db->query("INSERT INTO `userinfo`(`username`,`email`, `usertype`, `school`) VALUES('$username','$email', 'user', $schoolid);");
         }
 
         public function set_usertype($usertype = null){
@@ -123,6 +131,15 @@ class User_model extends CI_Model {
 
         public function search_professors($itemArray, $school){
             $qrystring = "SELECT * FROM `userinfo` WHERE `school`='$school' AND `usertype`='professor'";
+            for($i = 0; $i < count($itemArray); $i++){
+                $qrystring = $qrystring . ' AND `name` LIKE \'%' . $itemArray[$i] . '%\'';
+            }
+            $query = $this->db->query($qrystring);
+            return $query->result_array();
+        }
+
+        public function search_users($itemArray, $school){
+            $qrystring = "SELECT * FROM `userinfo` WHERE `school`='$school'";
             for($i = 0; $i < count($itemArray); $i++){
                 $qrystring = $qrystring . ' AND `name` LIKE \'%' . $itemArray[$i] . '%\'';
             }

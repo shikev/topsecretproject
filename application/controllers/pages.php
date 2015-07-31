@@ -85,6 +85,31 @@ class Pages extends CI_Controller{
 		}
 	}
 
+	public function profsearch(){
+		if(isset($_POST['prof_search_submit'])){
+			$this->load->model('school_model');
+			$search = $this->input->post('profs');
+			$items = explode(" ", $search);
+			$school = $this->user_model->get_school($this->tank_auth->get_username());
+			$data['schoolName'] = $this->school_model->get_school_name($school);
+			$data['userArray'] = $this->user_model->search_professors($items, $school);
+			$this->load->view('templates/navbar.php');
+			$this->load->view('templates/header.php');
+			$this->load->view('content/profsearch.php', $data);
+			$this->load->view('templates/footer.php');
+		}
+		else{
+			$this->load->model('school_model');
+			$school = $this->user_model->get_school($this->tank_auth->get_username());
+			$data['userArray'] = null;
+			$data['schoolName'] = $this->school_model->get_school_name($school);
+			$this->load->view('templates/navbar.php');
+			$this->load->view('templates/header.php');
+			$this->load->view('content/profsearch.php', $data);
+			$this->load->view('templates/footer.php');
+		}
+	}
+
 	public function usersearch(){
 		if(isset($_POST['users_search_submit'])){
 			$this->load->model('school_model');
@@ -92,7 +117,7 @@ class Pages extends CI_Controller{
 			$items = explode(" ", $search);
 			$school = $this->user_model->get_school($this->tank_auth->get_username());
 			$data['schoolName'] = $this->school_model->get_school_name($school);
-			$data['userArray'] = $this->user_model->search_professors($items, $school);
+			$data['userArray'] = $this->user_model->search_users($items, $school);
 			$this->load->view('templates/navbar.php');
 			$this->load->view('templates/header.php');
 			$this->load->view('content/usersearch.php', $data);
@@ -105,7 +130,7 @@ class Pages extends CI_Controller{
 			$data['schoolName'] = $this->school_model->get_school_name($school);
 			$this->load->view('templates/navbar.php');
 			$this->load->view('templates/header.php');
-			$this->load->view('content/listings.php', $data);
+			$this->load->view('content/usersearch.php', $data);
 			$this->load->view('templates/footer.php');
 		}
 	}
@@ -118,9 +143,13 @@ class Pages extends CI_Controller{
 		$categories = array($isChem, $isBio, $isPhys, $isEcon);
 		var_dump($categories);
 		$this->load->model('listing_model');
-		$data['listingArray'] = $this->listing_model->get_listings_by_category($categories);
-		var_dump($data['listingArray']);
-		$this->load->view('content/listingresults.php',$data);
+		$schoolid = $this->user_model->get_school($this->tank_auth->get_username());
+		$data['listingArray'] = $this->listing_model->get_listings_by_category($categories, $schoolid);
+		var_dump($schoolid);
+		$this->load->view('templates/listingheader.php');
+		$this->load->view('templates/navbar.php');
+		$this->load->view('content/listings.php', $data);
+		$this->load->view('templates/footer.php');
 	}
 
 	// public function changeusertype(){

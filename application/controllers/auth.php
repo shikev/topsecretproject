@@ -93,7 +93,10 @@ class Auth extends CI_Controller
 					$data['captcha_html'] = $this->_create_captcha();
 				}
 			}
+			$this->load->view('templates/header');
+			$this->load->view('templates/navbar');
 			$this->load->view('auth/login_form', $data);
+			$this->load->view('templates/footer');
 		}
 	}
 
@@ -152,8 +155,9 @@ class Auth extends CI_Controller
 						$use_username ? $this->form_validation->set_value('username') : '',
 						$this->form_validation->set_value('email'),
 						$this->form_validation->set_value('password'),
-						$email_activation))) {									// success
-					$this->user_model->set_username($this->form_validation->set_value('username'));
+						$email_activation))) {		
+													// success
+					$this->user_model->set_user($this->form_validation->set_value('username'), $this->form_validation->set_value('email'));
 					//$this->user_model->set_email($this->form_validation->set_value('username'), $this->form_validation->set_value('email'));
 					$data['site_name'] = $this->config->item('website_name', 'tank_auth');
 
@@ -190,7 +194,12 @@ class Auth extends CI_Controller
 			$data['use_username'] = $use_username;
 			$data['captcha_registration'] = $captcha_registration;
 			$data['use_recaptcha'] = $use_recaptcha;
+
+
+			$this->load->view('templates/header');
+			$this->load->view('templates/navbar');
 			$this->load->view('auth/register_form', $data);
+			$this->load->view('templates/footer');
 		}
 	}
 
@@ -198,7 +207,7 @@ class Auth extends CI_Controller
 	{
 		$this->load->model('school_model');
 		
-		$domain = substr(strrchr($str, "@"), 1);
+		$domain = substr(strrchr($email, "@"), 1);
 		if (!$this->school_model->check_valid($domain))
 		{
 			$this->form_validation->set_message('email_check', 'Your school is not supported yet"');
@@ -301,7 +310,10 @@ class Auth extends CI_Controller
 					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
 				}
 			}
+			$this->load->view('templates/header');
+			$this->load->view('templates/navbar');
 			$this->load->view('auth/forgot_password_form', $data);
+			$this->load->view('templates/footer');
 		}
 	}
 
@@ -347,7 +359,10 @@ class Auth extends CI_Controller
 				$this->_show_message($this->lang->line('auth_message_new_password_failed'));
 			}
 		}
+		$this->load->view('templates/header');
+		$this->load->view('templates/navbar');
 		$this->load->view('auth/reset_password_form', $data);
+		$this->load->view('templates/footer');
 	}
 
 	/**
@@ -378,7 +393,10 @@ class Auth extends CI_Controller
 					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
 				}
 			}
+			$this->load->view('templates/header');
+			$this->load->view('templates/navbar');
 			$this->load->view('auth/change_password_form', $data);
+			$this->load->view('templates/footer');
 		}
 	}
 
@@ -415,7 +433,11 @@ class Auth extends CI_Controller
 					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
 				}
 			}
+			$this->load->view('templates/header');
+			$this->load->view('templates/navbar');
 			$this->load->view('auth/change_email_form', $data);
+			$this->load->view('templates/footer');
+			
 		}
 	}
 

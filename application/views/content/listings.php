@@ -13,19 +13,19 @@
         <h4>Select Categories<h4>
         <?php echo form_open(base_url() . 'pages/listing_update', array('id'=>'category-filter')); ?>
             <div class="checkbox">
-                <?php echo form_checkbox(array('class'=>'form-control','value'=>'', 'name'=>'categoryBio','id'=>'categoryBio'))?>
+                <?php echo form_checkbox(array('class'=>'form-control','value'=>'true', 'name'=>'categoryBio','id'=>'categoryBio'))?>
                 Bio
             </div>      
             <div class="checkbox">
-                <?php echo form_checkbox(array('class'=>'form-control','value'=>'', 'name'=>'categoryChem','id'=>'categoryChem'))?>
+                <?php echo form_checkbox(array('class'=>'form-control','value'=>'true', 'name'=>'categoryChem','id'=>'categoryChem'))?>
                 Chem
             </div>    
             <div class="checkbox">
-                <?php echo form_checkbox(array('class'=>'form-control','value'=>'', 'name'=>'categoryPhysics','id'=>'categoryPhys'))?>
+                <?php echo form_checkbox(array('class'=>'form-control','value'=>'true', 'name'=>'categoryPhysics','id'=>'categoryPhys'))?>
                 Physics
             </div>
             <div class="checkbox">
-                <?php echo form_checkbox(array('class'=>'form-control','value'=>'', 'name'=>'categoryEcon','id'=>'categoryEcon'))?>
+                <?php echo form_checkbox(array('class'=>'form-control','value'=>'true', 'name'=>'categoryEcon','id'=>'categoryEcon'))?>
                 Econ
             </div>   
             <?php echo form_button( array('type'=>'submit', 'id'=>"category_submit" ,'class'=>'btn btn-primary', 'content'=>'Show me my page!'))?>

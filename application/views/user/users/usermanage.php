@@ -1,3 +1,4 @@
+<div class="fullpage">
 <div class="container body-container form-container">
         <?php echo form_open($this->uri->uri_string(), array('id'=>'form1', 'class'=>'form-horizontal'));?>
             <ul class="nav nav-tabs" role="tablist">

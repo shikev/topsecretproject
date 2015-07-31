@@ -1,4 +1,6 @@
-<?php foreach ($listingArray as $listing_item): ?>
+
+
+<?php if($listingArray != null) foreach ($listingArray as $listing_item): ?>
 
 <?php if(gettype($listing_item) == 'object') $listing_item = get_object_vars($listing_item);?>
 
@@ -11,3 +13,7 @@
   </div>
 
   <?php endforeach ?>
+
+  <?php if($listingArray == null){
+  	echo '<h3>No results found</h3>';
+  }

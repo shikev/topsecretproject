@@ -16,6 +16,7 @@
     
     <!-- Custom CSS -->
     <link href="<?php echo base_url(); ?>assets/css/sweetalert.css" rel="stylesheet" />
+     <link href="<?php echo base_url(); ?>assets/css/custom-styles.css" rel="stylesheet" />
     <!-- Javascript -->
     <script language="javascript" type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery-1.10.2.js"></script>
     <script language="javascript" type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>

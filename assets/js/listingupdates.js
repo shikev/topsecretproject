@@ -1,10 +1,10 @@
 $(document).ready(function() { 
-            alert('fuck');
         /*place jQuery actions here*/ 
+        alert('shit');
         var link = "http://localhost/project/"; // Url to your application (including index.php/)
         $("#category-filter").submit(function(event) {
             event.preventDefault();
-
+            alert('submited');
             var isChem = '';
             var isBio = '';
             var isPhys ='';
@@ -35,9 +35,9 @@ $(document).ready(function() {
             
 
             $.post(link + "pages/listing_update", { categoryChem: isChem, categoryBio: isBio, categoryPhysics: isPhys, 
-                categoryEcon: isEcon},
+                categoryEcon: isEcon, ajax:1},
                 function(data){ 
-                    alert( "Handler for .submit() called." );
+                    alert( "data was posted" );
                     // Interact with returned data
                     $("#results").html(data); // Replace the information in the div #cart_content with the retrieved data
 
