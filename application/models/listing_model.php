@@ -6,16 +6,48 @@ class Listing_model extends CI_Model {
                 $this->load->database();
         }
 
-        public function create_listing($name, $reqs, $description, $pay, $time, $school, $username, $categories){
-            $this->db->query("INSERT INTO `listings`(`name`, `requirements`, `description`, `pay`, `workschedule`, `school`, `username`) VALUES ('$name', '$reqs', '$description', '$pay', '$time', '$school', '$username');");
+        public function create_listing($name, $reqs, $description, $time, $school, $username, $categories){
+            $this->db->query("INSERT INTO `listings`(`name`, `requirements`, `description`, `workschedule`, `school`, `username`) VALUES ('$name', '$reqs', '$description', '$time', '$school', '$username');");
             for($i = 0; $i < count($categories); ++$i){
                 if($categories[$i] == 'true'){
                     $this->db->query("INSERT INTO `listing_categories`(`listing_id`, `category`) VALUES (LAST_INSERT_ID(),$i)");
                 }
             }
-            
-
         }
+
+        public function update($name, $reqs, $description, $time, $school, $username, $categories, $id){
+            $this->db->query("UPDATE `listings` SET `name`='$name', `requirements`='$reqs',`description`='$description',
+                `workschedule`='$time',`school`=$school,`username`='$username' WHERE `id`=$id");
+            $this->db->query("DELETE FROM `listing_categories` WHERE `listing_id`=$id");
+            for($i = 0; $i < count($categories); ++$i){
+                if($categories[$i] == 'true'){
+                    $this->db->query("INSERT INTO `listing_categories`(`listing_id`, `category`, `school_id`) VALUES ($id,$i,$school)");
+                }
+            }
+        }
+
+        public function prep_update($id){
+            $query = $this->db->query("SELECT * FROM `listings` WHERE `id`=$id LIMIT 1");
+            if($query->num_rows() > 0){
+                return $query->row_array();
+            }
+            else{
+                return null;
+            }
+        }
+        
+
+        public function get_listing_by_id($id, $schoolid){
+            $query = $this->db->query("SELECT * FROM `listings` WHERE `school`=$schoolid AND `id`=$id LIMIT 1");
+            if($query->num_rows() > 0){
+                return $query->row_array();
+            }
+            else{
+                return null;
+            }
+        }
+
+        
         //Gets all the listings for a specific school
         public function get_listings($school){
             $query = $this->db->query("SELECT * FROM `listings` WHERE `school`=$school");
@@ -63,6 +95,17 @@ class Listing_model extends CI_Model {
                 return null;
             }
             
+        }
+
+        public function get_listings_by_username($username = null){
+            if($username == null){
+                return null;
+            }
+            else{
+                $query = $this->db->query("SELECT * FROM `listings` WHERE `username`='$username'");
+               
+                return $query->result_array();
+            }
         }
 
         public function search($itemArray, $school){

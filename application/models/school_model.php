@@ -13,6 +13,7 @@ class School_model extends CI_Model {
             return $query->row(0)->school;
         }
 
+
         public function check_valid($domain){
         	$query = $this->db->query("SELECT `school` FROM `schools` WHERE `extension`='$domain'");
         	if($query->num_rows() == 0){

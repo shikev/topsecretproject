@@ -1,9 +1,13 @@
-<div class="container body-container form-container">
+<div class="container body-container form-container fullpage">
         <?php echo form_open($this->uri->uri_string(), array('id'=>'form1', 'class'=>'form-horizontal'));?>
             <ul class="nav nav-tabs" role="tablist">
                 <li class="active"><a href="#profile" role="tab" data-toggle="tab">Profile</a></li>
                 <li><a href="#information" role="tab" data-toggle="tab">Info</a></li>
+                <li><a href="#connections" role="tab" data-toggle="tab">Connections</a></li>
+                <li><a href="#requests" role="tab" data-toggle="tab">Requests</a></li>
                 <li><a href="#account" role="tab" data-toggle="tab">Account</a></li>
+
+
             </ul>
 
     <div class="tab-content">
@@ -47,9 +51,9 @@
             <div class="form-heading"><h2>User Information</h2></div>
             <div class="form-heading"><h5>These will be public to those who view your profile</h5></div>
             <div class="form-group">
-                <label class="col-sm-2 control-label" for="hook">Graduation Year: </label>
+                <label class="col-sm-2 control-label" for="hook">Department: </label>
                 <div class="col-sm-9">
-                    <?php echo form_input(array('value'=>$gradyear, 'name'=>'gradyear','id'=>'gradyear' ,'class'=>'form-control', 'placeholder'=>'May 2018'))?>
+                    <?php echo form_input(array('value'=>$department, 'name'=>'department','id'=>'department' ,'class'=>'form-control', 'placeholder'=>'Computer Science'))?>
                 </div>
             </div>
             <div class="form-group">
@@ -65,24 +69,6 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label" for="skills">Skills</label>
-                <div class="col-sm-9">
-                    <?php echo form_textarea(array('value'=>$skills, 'name'=>'skills','id'=>'skills' ,'class'=>'form-control', 'placeholder'=>'Your skills'))?>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="linkedin">LinkedIn Profile: </label>
-                <div class="col-sm-9">
-                    <?php echo form_input(array('value'=>$linkedin, 'name'=>'linkedin','id'=>'linkedin' ,'class'=>'form-control', 'placeholder'=>'https://www.linkedin.com/yourprofile'))?>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="resume">Resume: </label>
-                <div class="col-sm-9">
-                    <?php echo form_input(array('value'=>$resume, 'name'=>'resume','id'=>'resume' ,'class'=>'form-control', 'placeholder'=>'Link to resume'))?>
-                </div>
-            </div>
-            <div class="form-group">
                 <label class="col-sm-2 control-label" for="additionalinfo">Additional Info</label>
                 <div class="col-sm-9">
                     <?php echo form_textarea(array('value'=>$additionalinfo, 'name'=>'additionalinfo','id'=>'additionalinfo' ,'class'=>'form-control', 'placeholder'=>'Extra info you would like others to see'))?>
@@ -90,6 +76,40 @@
             </div>
             <?php echo form_button( array('name'=>'info_submit','type'=>'submit', 'id'=>"btnSubmit" ,'class'=>'btn btn-default maroon center-block', 'onclick'=>'validate();', 'content'=>'Save'))?>
             <?php echo form_close()?>
+
+
+        </div>
+
+        <div class="tab-pane" id="connections">
+            <div class="form-heading"><h2>Connections</h2></div>
+            <div class="form-heading"><h5>Manage your connections<?php echo $this->tank_auth->get_username(); ?></h5></div>
+
+                <?php foreach($connectionsArray as $connection){ 
+                    echo $connection['sourcename']; echo '<br>';
+                    
+                }?>
+
+
+        </div>
+
+        <div class="tab-pane" id="requests">
+            <div class="form-heading"><h2>Requests</h2></div>
+            <div class="form-heading"><h5>Manage your requests</h5></div>
+                <?php var_dump($requestsArray);?>
+                <?php if($requestsArray != null){
+                    foreach($requestsArray as $request){ 
+                        if($request['type'] == 'endorsement'){
+                            echo $request['source'] . "would an endorsement from you<br>";
+                            echo "Message:" . $request['message'] . "<br>";
+                            echo '<button class="btn">Approve</button><br>';
+                        }
+                        else if($request['type'] == 'recletter'){
+                            echo $request['source'] . " would like you to write a letter of recommendation for them.<br>";
+                            echo "Message:" . $request['message'] . "<br>";
+                            echo '<button class="btn">Answer</button><br>';
+                        }
+                    }
+                }?>
 
 
         </div>

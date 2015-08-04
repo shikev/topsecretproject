@@ -60,6 +60,19 @@ class User_model extends CI_Model {
                 }
         }
 
+        public function get_username_by_email($email = null){
+            if($email != null){
+                        $query = $this->db->query("SELECT `username` FROM `userinfo` WHERE `email`='$email' LIMIT 1;");
+                        if($query->num_rows() > 0){
+                                $row = $query->row_array();
+                                return $row['username'];
+                        }
+                }
+            else{
+                return null;
+            }
+        }
+
         public function get_name($username = null){
                 if($username != null){
                       $query = $this->db->query("SELECT `name` FROM `userinfo` WHERE `username`='$username' LIMIT 1;");
@@ -67,6 +80,9 @@ class User_model extends CI_Model {
                                 $row = $query->row_array();
                                 return $row['name'];
                         }  
+                }
+                else{
+                    return null;
                 }
         }
 
@@ -78,6 +94,9 @@ class User_model extends CI_Model {
                                 return $row['email'];
                         }     
                 }
+                else{
+                    return null;
+                }
         }
 
         public function get_school($username = null){
@@ -88,6 +107,9 @@ class User_model extends CI_Model {
                                 return $row['school'];
                         }     
                 }
+                else{
+                    return null;
+                }
         }
 
         public function get_phonenumber($username = null){
@@ -97,6 +119,9 @@ class User_model extends CI_Model {
                                 $row = $query->row_array();
                                 return $row['phonenumber'];
                         }     
+                }
+                else{
+                    return null;
                 }
         }
 

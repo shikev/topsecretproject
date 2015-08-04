@@ -210,7 +210,7 @@ class Auth extends CI_Controller
 		$domain = substr(strrchr($email, "@"), 1);
 		if (!$this->school_model->check_valid($domain))
 		{
-			$this->form_validation->set_message('email_check', 'Your school is not supported yet"');
+			$this->form_validation->set_message('email_check', 'This school is not supported yet or this email is not valid');
 			return FALSE;
 		}
 		else
@@ -412,7 +412,7 @@ class Auth extends CI_Controller
 
 		} else {
 			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email');
+			$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email|callback_email_check');
 
 			$data['errors'] = array();
 

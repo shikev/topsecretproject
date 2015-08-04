@@ -14,16 +14,29 @@ class Pages extends CI_Controller{
 		}
 
 	public function index(){
-		$this->load->view('templates/header.php');
-		$this->load->view('templates/navbar.php');
+		if(!$this->tank_auth->is_logged_in()){
+			$this->load->view('templates/header.php');
+			$this->load->view('templates/navbar.php');
 
-		$this->load->view('content/home');
-		$this->load->view('templates/footer.php');
+			$this->load->view('content/nologinhome.php');
+			$this->load->view('templates/footer.php');
+		}
+		else{
+			$this->load->view('templates/header.php');
+			$this->load->view('templates/navbar.php');
+
+			$this->load->view('content/home');
+			$this->load->view('templates/footer.php');
+		}
+		
 
 	}
 
 
 	public function listings(){
+		if(!$this->tank_auth->is_logged_in()){
+			redirect(base_url());
+		}
 		if(isset($_POST['listing_search_submit'])){
 			$this->load->model('listing_model');
 			$this->load->model('school_model');
@@ -55,6 +68,9 @@ class Pages extends CI_Controller{
 
 	//add in logic for out of schoolers/own profile
 	public function profile($username = null){
+		if(!$this->tank_auth->is_logged_in()){
+			redirect(base_url());
+		}
 		if($username == null){
 			redirect('');
 		}
@@ -86,6 +102,9 @@ class Pages extends CI_Controller{
 	}
 
 	public function profsearch(){
+		if(!$this->tank_auth->is_logged_in()){
+			redirect(base_url());
+		}
 		if(isset($_POST['prof_search_submit'])){
 			$this->load->model('school_model');
 			$search = $this->input->post('profs');
@@ -111,6 +130,9 @@ class Pages extends CI_Controller{
 	}
 
 	public function usersearch(){
+		if(!$this->tank_auth->is_logged_in()){
+			redirect(base_url());
+		}
 		if(isset($_POST['users_search_submit'])){
 			$this->load->model('school_model');
 			$search = $this->input->post('users');
@@ -136,6 +158,13 @@ class Pages extends CI_Controller{
 	}
 
 	public function listing_update(){
+		if(!$this->tank_auth->is_logged_in()){
+			redirect(base_url());
+		}
+		else if($this->user_model->get_usertype() != 'professor'){
+			redirect(base_url());
+		}
+		
 		$isChem = $this->input->post('categoryChem');
 		$isBio = $this->input->post('categoryBio');
 		$isPhys = $this->input->post('categoryPhysics');
